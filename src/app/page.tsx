@@ -1,65 +1,129 @@
-import Image from "next/image";
+import Link from 'next/link'
+import ParticlesCanvas from './ParticlesCanvas'
+
+const EASE = 'cubic-bezier(0.4, 0, 0.2, 1)'
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main style={{
+      minHeight: '100dvh',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'var(--color-darker)',
+      padding: '1.5rem',
+      position: 'relative',
+      overflow: 'hidden',
+    }}>
+      <ParticlesCanvas />
+
+      <div style={{ textAlign: 'center', maxWidth: '32rem', width: '100%', position: 'relative', zIndex: 1 }}>
+
+        {/* Badge AR */}
+        <div style={{
+          display: 'inline-block',
+          border: '1px solid rgba(212, 162, 76, 0.35)',
+          padding: '5px 14px',
+          marginBottom: '2rem',
+          animation: `fadeIn 600ms ${EASE} 0ms both`,
+        }}>
+          <span style={{
+            color: 'rgba(212, 162, 76, 0.65)',
+            fontSize: '0.58rem',
+            fontFamily: 'var(--font-montserrat-font)',
+            letterSpacing: '5px',
+            fontWeight: 600,
+          }}>
+            EXPERIENCIA AR
+          </span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Bella */}
+        <h1 style={{
+          fontSize: 'clamp(3.5rem, 15vw, 6rem)',
+          color: 'white',
+          fontFamily: 'var(--font-playfair-display)',
+          lineHeight: 1.1,
+          letterSpacing: '-0.01em',
+          animation: `slideUp 700ms ${EASE} 200ms both`,
+        }}>
+          Bella
+        </h1>
+
+        {/* MOTRIL */}
+        <h2 style={{
+          fontSize: 'clamp(0.85rem, 3.5vw, 1.1rem)',
+          color: 'var(--color-gold)',
+          fontFamily: 'var(--font-montserrat-font)',
+          letterSpacing: '0.55em',
+          fontWeight: 600,
+          marginTop: '0.2rem',
+          marginBottom: '2rem',
+          animation: `slideUp 700ms ${EASE} 400ms both`,
+        }}>
+          MOTRIL
+        </h2>
+
+        {/* Ornament */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '0.75rem',
+          marginBottom: '2rem',
+          animation: `fadeIn 700ms ${EASE} 600ms both`,
+        }}>
+          <div style={{ width: '2.5rem', height: '1px', backgroundColor: 'var(--color-gold)', opacity: 0.35 }} />
+          <span style={{ color: 'var(--color-gold)', opacity: 0.55, fontSize: '0.65rem' }}>✦</span>
+          <div style={{ width: '2.5rem', height: '1px', backgroundColor: 'var(--color-gold)', opacity: 0.35 }} />
         </div>
-      </main>
-    </div>
-  );
+
+        {/* Slogan */}
+        <p style={{
+          color: '#9ca3af',
+          fontStyle: 'italic',
+          fontSize: 'clamp(0.9rem, 3.5vw, 1.05rem)',
+          fontFamily: 'var(--font-playfair-display)',
+          marginBottom: '3.5rem',
+          lineHeight: 1.7,
+          animation: `fadeIn 700ms ${EASE} 800ms both`,
+        }}>
+          Donde la tradición italiana cobra vida
+        </p>
+
+        {/* CTA */}
+        <div style={{ animation: `fadeIn 600ms ${EASE} 1000ms both` }}>
+          <Link
+            href="/ar"
+            className="btn-cta-home"
+            style={{ fontFamily: 'var(--font-montserrat-font)', fontWeight: 600 }}
+          >
+            INICIAR EXPERIENCIA AR
+          </Link>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div style={{
+        position: 'absolute',
+        bottom: 'calc(1.5rem + env(safe-area-inset-bottom))',
+        left: 0,
+        right: 0,
+        textAlign: 'center',
+        animation: `fadeIn 700ms ${EASE} 1200ms both`,
+        zIndex: 1,
+      }}>
+        <p style={{
+          color: 'white',
+          opacity: 0.4,
+          fontSize: '0.62rem',
+          fontFamily: 'var(--font-montserrat-font)',
+          letterSpacing: '0.18em',
+        }}>
+          Costa Tropical · Andalucía
+        </p>
+      </div>
+    </main>
+  )
 }

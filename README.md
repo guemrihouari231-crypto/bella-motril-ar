@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bella Motril — AR Menu Experience
 
-## Getting Started
+An augmented reality menu for Bella Motril pizzeria. Point your phone camera at a pizza image on the physical menu to see an interactive 3D model of the pizza float above it — with ambient sound, WhatsApp ordering, and a cinematic home screen.
 
-First, run the development server:
+## Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 15 (App Router, Webpack) |
+| 3D Rendering | Three.js 0.147 |
+| AR Tracking | MindAR 1.2.5 (image tracking) |
+| Styling | Tailwind CSS v4 |
+| Language | TypeScript |
+| Deploy | Vercel |
+
+## Getting started locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> **HTTPS required** — browser camera access (`getUserMedia`) is blocked on plain HTTP except on `localhost`. For testing on a real device over your local network, use a tunneling tool such as `ngrok` or run the dev server behind a self-signed certificate.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## AR targets
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The file `public/ar-targets/targets.mind` contains three image targets (index 0 → Margherita, 1 → Diavola, 2 → Quattro Formaggi). Regenerate it with the [MindAR target compiler](https://hiukim.github.io/mind-ar-js-doc/tools/compile) if you update the reference images.
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+public/
+  3d-models/        # Meshopt-compressed GLB pizza models
+  ar-targets/       # Compiled MindAR target file
+src/
+  app/
+    page.tsx        # Cinematic home screen
+    ar/             # AR experience (ARScene, WhatsApp button, audio)
+  types/            # Ambient declarations for MindAR & MeshoptDecoder
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built with [Claude Code](https://claude.ai/claude-code) by Houari
