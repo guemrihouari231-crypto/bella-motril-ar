@@ -1,11 +1,16 @@
 import Link from 'next/link'
 import ParticlesCanvas from './ParticlesCanvas'
+import MesaBadge from '@/components/MesaBadge'
+import CartIcon from '@/components/CartIcon'
 
 const EASE = 'cubic-bezier(0.4, 0, 0.2, 1)'
 
 export default function Home() {
   return (
-    <main style={{
+    <>
+      <MesaBadge />
+      <CartIcon />
+      <main style={{
       minHeight: '100dvh',
       display: 'flex',
       flexDirection: 'column',
@@ -125,5 +130,6 @@ export default function Home() {
         </p>
       </div>
     </main>
+    </>
   )
 }

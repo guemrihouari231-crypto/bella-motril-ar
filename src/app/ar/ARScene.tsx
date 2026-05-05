@@ -7,18 +7,22 @@ import Link from 'next/link'
 import { MindARThree } from 'mind-ar/dist/mindar-image-three.prod.js'
 import WhatsAppButton from './WhatsAppButton'
 import AudioMuteButton from './AudioMuteButton'
+import CartIcon from '@/components/CartIcon'
+import AddToCartButton from '@/components/AddToCartButton'
 
 interface PizzaConfig {
+  id:           string
   name:         string
+  price:        number
   file:         string
   anchorIndex:  number
   baseRotation: { x: number; y: number; z: number }
 }
 
 const PIZZAS: PizzaConfig[] = [
-  { name: 'Margherita',      file: '/3d-models/margherita.glb',      anchorIndex: 0, baseRotation: { x: 0, y: 0, z: 0 } },
-  { name: 'Diavola',         file: '/3d-models/diavola.glb',         anchorIndex: 1, baseRotation: { x: 0, y: 0, z: 0 } },
-  { name: 'Quattro Formaggi',file: '/3d-models/quattro-formaggi.glb', anchorIndex: 2, baseRotation: { x: 0, y: 0, z: 0 } },
+  { id: 'margherita',       name: 'Margherita',      price: 12, file: '/3d-models/margherita.glb',       anchorIndex: 0, baseRotation: { x: 0, y: 0, z: 0 } },
+  { id: 'diavola',          name: 'Diavola',          price: 14, file: '/3d-models/diavola.glb',          anchorIndex: 1, baseRotation: { x: 0, y: 0, z: 0 } },
+  { id: 'quattro-formaggi', name: 'Quattro Formaggi', price: 13, file: '/3d-models/quattro-formaggi.glb', anchorIndex: 2, baseRotation: { x: 0, y: 0, z: 0 } },
 ]
 
 const BOARD_KEYWORDS = ['pala', 'board', 'wood', 'planche', 'plank', 'plate', 'tray', 'piedest', 'base_plate']
@@ -447,6 +451,8 @@ export default function ARScene() {
   }, [retryKey])
 
   const isLoading = arState === 'loading' || arState === 'initializing'
+  // Pizza actuellement trackée avec id et prix — utilisée pour AddToCartButton
+  const activePizza = PIZZAS.find(p => p.name === activePizzaName) ?? null
 
   return (
     <div style={{
@@ -464,6 +470,9 @@ export default function ARScene() {
         ref={particlesCanvasRef}
         style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 10 }}
       />
+
+      {/* Icône panier flottante */}
+      <CartIcon />
 
       {/* Gold radial glow when pizza detected */}
       {activePizzaName && arState === 'ready' && (
@@ -513,11 +522,24 @@ export default function ARScene() {
         </div>
       )}
 
-      {/* ── WhatsApp button ──────────────────────────────────────────────────── */}
-      {activePizzaName && arState === 'ready' && (
+      {/* ── Bouton "Añadir al pedido" — CTA principal ───────────────────────── */}
+      {activePizza && arState === 'ready' && (
         <div style={{
           position: 'absolute',
           bottom: 'calc(5.5rem + env(safe-area-inset-bottom))',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 30,
+        }}>
+          <AddToCartButton pizza={activePizza} />
+        </div>
+      )}
+
+      {/* ── WhatsApp button — déplacé au-dessus du bouton panier ────────────── */}
+      {activePizzaName && arState === 'ready' && (
+        <div style={{
+          position: 'absolute',
+          bottom: 'calc(9.5rem + env(safe-area-inset-bottom))',
           left: '50%',
           transform: 'translateX(-50%)',
           zIndex: 30,

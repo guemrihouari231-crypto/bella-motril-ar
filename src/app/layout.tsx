@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import { Playfair_Display, Montserrat } from 'next/font/google'
+import { Suspense } from 'react'
+import { MesaProvider } from '@/lib/MesaContext'
+import { CartProvider } from '@/lib/CartContext'
 import './globals.css'
 
 const playfairDisplay = Playfair_Display({
@@ -38,7 +41,15 @@ export default function RootLayout({
       lang="es"
       className={`${playfairDisplay.variable} ${montserrat.variable}`}
     >
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+          <Suspense fallback={null}>
+            <MesaProvider>
+              <CartProvider>
+                {children}
+              </CartProvider>
+            </MesaProvider>
+          </Suspense>
+        </body>
     </html>
   )
 }
