@@ -2,6 +2,7 @@ import Link from 'next/link'
 import ParticlesCanvas from './ParticlesCanvas'
 import MesaBadge from '@/components/MesaBadge'
 import CartIcon from '@/components/CartIcon'
+import CocinaLink from '@/components/CocinaLink'
 
 const EASE = 'cubic-bezier(0.4, 0, 0.2, 1)'
 
@@ -128,6 +129,7 @@ export default function Home() {
         }}>
           Costa Tropical · Andalucía
         </p>
+        <CocinaLink />
       </div>
     </main>
     </>
