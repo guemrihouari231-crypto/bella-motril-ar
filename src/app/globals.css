@@ -33,9 +33,17 @@
 
 html,
 body {
+  width: 100%;
   max-width: 100vw;
   overflow-x: hidden;
   background-color: var(--color-darker);
+}
+
+/* Empêche Safari iOS d'agrandir automatiquement les textes */
+@supports (-webkit-touch-callout: none) {
+  body {
+    -webkit-text-size-adjust: 100%;
+  }
 }
 
 /* ── Keyframe animations ─────────────────────────────────────────────────── */
@@ -151,4 +159,13 @@ body {
   transform: scale(1.05);
   animation: none;
   box-shadow: 0 4px 24px rgba(212, 162, 76, 0.35);
+}
+
+/* Réduit le padding et le letter-spacing sur petits écrans pour éviter le débordement */
+@media (max-width: 480px) {
+  .btn-cta-home {
+    padding: 14px 24px;
+    letter-spacing: 2px;
+    font-size: 0.68rem;
+  }
 }

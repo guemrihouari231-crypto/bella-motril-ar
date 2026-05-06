@@ -224,7 +224,7 @@ export default function AdminPage() {
         {/* ── KPI Cards ──────────────────────────────────────────────────── */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(240px, 100%), 1fr))',
           gap: '1rem',
           marginBottom: '2rem',
         }}>
@@ -331,7 +331,7 @@ export default function AdminPage() {
         {/* ── Top dishes + Recent orders (2 columns on wide screens) ─────── */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
           gap: '1rem',
           marginBottom: '2rem',
         }}>

@@ -200,30 +200,36 @@ export default function CocinaPage() {
         zIndex: 50,
         backgroundColor: 'rgba(26,26,26,0.95)',
         borderBottom: '1px solid rgba(201, 169, 97, 0.35)',
-        padding: '0.875rem 1.5rem',
+        padding: '0.75rem 1rem',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        gap: '1rem',
+        gap: '0.5rem',
         backdropFilter: 'blur(8px)',
         WebkitBackdropFilter: 'blur(8px)',
         flexShrink: 0,
+        flexWrap: 'wrap',
       }}>
-        {/* Logo cuisine */}
+        {/* Logo cuisine — tronqué si l'écran est trop étroit */}
         <span style={{
           color: '#C9A961',
           fontWeight: 700,
           fontSize: '0.82rem',
-          letterSpacing: '0.12em',
+          letterSpacing: '0.08em',
           whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          minWidth: 0,
+          flexShrink: 1,
         }}>
-          🍕 BELLA MOTRIL — COCINA
+          🍕 BELLA — COCINA
         </span>
 
         {/* Indicateur de connexion Realtime */}
         <span style={{
-          fontSize: '0.72rem',
+          fontSize: '0.7rem',
           fontWeight: 500,
+          flexShrink: 0,
           color: connectionStatus === 'connected'    ? '#4ade80'
                : connectionStatus === 'connecting'   ? '#facc15'
                : '#f87171',
@@ -232,7 +238,7 @@ export default function CocinaPage() {
         </span>
 
         {/* Droite : compteur nouvelles commandes + plein écran */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexShrink: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
           <AnimatePresence mode="wait">
             {newCount > 0 && (
               <motion.span
@@ -257,14 +263,14 @@ export default function CocinaPage() {
               color: '#C9A961',
               fontSize: '0.68rem',
               fontWeight: 600,
-              padding: '0.4rem 0.7rem',
+              padding: '0.4rem 0.6rem',
               cursor: 'pointer',
               whiteSpace: 'nowrap',
-              letterSpacing: '0.05em',
+              letterSpacing: '0.04em',
               fontFamily: FONT_SANS,
             }}
           >
-            📺 Pantalla completa
+            📺
           </button>
         </div>
       </header>
@@ -315,7 +321,7 @@ export default function CocinaPage() {
         <div style={{
           padding: '24px',
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(320px, 100%), 1fr))',
           gap: '16px',
           alignItems: 'start',
         }}>

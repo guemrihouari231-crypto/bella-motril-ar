@@ -91,29 +91,41 @@ export default function CartModal({ onClose }: Props) {
         }}
       />
 
-      {/* Fenêtre modale */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 24 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.95, y: 24 }}
-        transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
-        style={{
-          position: 'fixed',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          zIndex: 10001,
-          width: 'min(500px, calc(100vw - 2rem))',
-          maxHeight: '82vh',
-          backgroundColor: '#1a1a1a',
-          border: '1px solid rgba(212, 162, 76, 0.4)',
-          borderRadius: '16px',
-          display: 'flex',
-          flexDirection: 'column',
-          overflow: 'hidden',
-          boxShadow: '0 24px 64px rgba(0,0,0,0.65)',
-        }}
-      >
+      {/*
+        Wrapper de centrage — flexbox full-viewport.
+        Plus fiable que left:50%+translate sur iOS Safari (évite le scroll horizontal).
+        pointerEvents:none pour laisser passer les clics vers l'overlay.
+      */}
+      <div style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 10001,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '1rem 0.5rem',
+        pointerEvents: 'none',
+      }}>
+        {/* Fenêtre modale */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 24 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95, y: 24 }}
+          transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+          style={{
+            pointerEvents: 'all',
+            width: '100%',
+            maxWidth: '500px',
+            maxHeight: '82vh',
+            backgroundColor: '#1a1a1a',
+            border: '1px solid rgba(212, 162, 76, 0.4)',
+            borderRadius: '16px',
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+            boxShadow: '0 24px 64px rgba(0,0,0,0.65)',
+          }}
+        >
         {/* ── En-tête ─────────────────────────────────────────────────────── */}
         <div style={{
           display: 'flex',
@@ -361,7 +373,8 @@ export default function CartModal({ onClose }: Props) {
             {isLoading ? 'Enviando...' : 'Confirmar pedido'}
           </motion.button>
         </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </>
   )
 }

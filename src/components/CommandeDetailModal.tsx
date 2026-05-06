@@ -47,6 +47,24 @@ export default function CommandeDetailModal({ commande, onClose }: Props) {
             }}
           />
 
+          {/*
+            Wrapper de centrage — flexbox full-viewport.
+            Évite left:50%+translate sur iOS Safari.
+            pointerEvents:none pour laisser passer les clics vers l'overlay.
+          */}
+          <div
+            key="modal-wrapper"
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 10001,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '1rem 0.5rem',
+              pointerEvents: 'none',
+            }}
+          >
           {/* Modale */}
           <motion.div
             key="modal"
@@ -55,11 +73,9 @@ export default function CommandeDetailModal({ commande, onClose }: Props) {
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
             style={{
-              position: 'fixed',
-              top: '50%', left: '50%',
-              transform: 'translate(-50%, -50%)',
-              zIndex: 10001,
-              width: 'min(480px, calc(100vw - 2rem))',
+              pointerEvents: 'all',
+              width: '100%',
+              maxWidth: '480px',
               maxHeight: '80vh',
               backgroundColor: '#1a1a1a',
               border: '1px solid rgba(201,169,97,0.4)',
@@ -186,6 +202,7 @@ export default function CommandeDetailModal({ commande, onClose }: Props) {
               </button>
             </div>
           </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>
